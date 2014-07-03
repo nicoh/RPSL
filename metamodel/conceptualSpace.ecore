@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="conceptualSpaceMetaModel" nsURI="http://de.brsu.robotics.rpa.rpsl.de/conceptualSpaceMetaModel"
+    nsPrefix="conceptualSpaceMetaModel">
+  <eClassifiers xsi:type="ecore:EClass" name="ConceptualSpaceModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concept" upperBound="-1"
+        eType="#//Concept" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Concept">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subConcept" upperBound="-1"
+        eType="#//Concept" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" lowerBound="1"
+        upperBound="-1" eType="#//Domain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" upperBound="-1"
+        eType="#//AbstractInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Domain">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimension" lowerBound="1"
+        upperBound="-1" eType="#//DomainDimension"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainDimension">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntervalDimension" eSuperTypes="#//DomainDimension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrdinalDimension" eSuperTypes="#//DomainDimension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NominalDimension" eSuperTypes="#//DomainDimension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RatioDimension" eSuperTypes="#//DomainDimension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractInstance" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataInstance" eSuperTypes="#//AbstractInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prototype" lowerBound="1"
+        upperBound="-1" eType="#//PrototypeInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrototypeInstance" eSuperTypes="#//AbstractInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceElement" lowerBound="1"
+        upperBound="-1" eType="#//InstanceElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceDimension" lowerBound="1"
+        eType="#//DomainDimension"/>
+  </eClassifiers>
+</ecore:EPackage>
