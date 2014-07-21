@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/RPSL/src" modelPluginID="RPSL" modelName="Rpsl"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>rpsl.ecore</foreignModel>
+  <genPackages prefix="RobotPerceptionSpecificationLanguageMetaModel" disposableProviderFactory="true"
+      ecorePackage="rpsl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpsl.ecore#//COMPLEXITY">
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//COMPLEXITY/CONSTANT"/>
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//COMPLEXITY/DOUBLE_LOG"/>
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//COMPLEXITY/LINEAR"/>
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//COMPLEXITY/EXPONENTIAL"/>
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//COMPLEXITY/ANYTIME"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpsl.ecore#//SIMILARITY_METRIC">
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//SIMILARITY_METRIC/EUCLIDIAN_DISTANCE"/>
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//SIMILARITY_METRIC/JACCARD_DISTANCE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="rpsl.ecore#//REQUEST_SAMPLE_SPEC">
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//REQUEST_SAMPLE_SPEC/LIST_OF_SAMPLE"/>
+      <genEnumLiterals ecoreEnumLiteral="rpsl.ecore#//REQUEST_SAMPLE_SPEC/SAMPLE_OF"/>
+    </genEnums>
+    <genClasses ecoreClass="rpsl.ecore#//Component">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Component/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Component/doc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpsl.ecore#//Component/port"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Component/component_property_prototype"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Component/QoS"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Port">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Port/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Port/doc"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Port/port_type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Port/port_prototype"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//SensorComponent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//SensorComponent/algorithm"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//ProcessingComponent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//ProcessingComponent/algorithm"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//InputPort"/>
+    <genClasses ecoreClass="rpsl.ecore#//OutputPort"/>
+    <genClasses ecoreClass="rpsl.ecore#//PerceptionGraph">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//PerceptionGraph/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//PerceptionGraph/doc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpsl.ecore#//PerceptionGraph/element"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Element/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Element/doc"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Element/component"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Leaf"/>
+    <genClasses ecoreClass="rpsl.ecore#//Node">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpsl.ecore#//Node/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Connection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Connection/element"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Connection/sink"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Connection/src"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Algorithm">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Algorithm/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Algorithm/complexity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Algorithm/doc"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Algorithm/category"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//AlgorithmImplementation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//AlgorithmImplementation/algorithm_property_prototype"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Category">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Category/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Category/doc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpsl.ecore#//Category/subCategory"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Concept">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Concept/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Concept/doc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpsl.ecore#//Concept/subConcept"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Concept/domain"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="rpsl.ecore#//AbstractInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//AbstractInstance/concept"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Data">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//Data/prototype"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Prototype">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpsl.ecore#//Prototype/prototype_element"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Domain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Domain/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rpsl.ecore#//Domain/dimension"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//DomainDimension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//DomainDimension/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//DomainDimension/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//IntervalDimension">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//IntervalDimension/interval"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//OrdinalDimension"/>
+    <genClasses ecoreClass="rpsl.ecore#//NominalDimension"/>
+    <genClasses ecoreClass="rpsl.ecore#//RatioDimension"/>
+    <genClasses ecoreClass="rpsl.ecore#//PrototypeElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//PrototypeElement/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//PrototypeElement/prototype_dimension"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Interval">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Interval/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Interval/doc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Interval/is_circular"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Interval/lower_bound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Interval/upper_bound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Interval/primitive_type"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//Request">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Request/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//Request/request_sample_spec"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//PrototypeRequest">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//PrototypeRequest/request_similarity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rpsl.ecore#//PrototypeRequest/request_prototype"/>
+    </genClasses>
+    <genClasses ecoreClass="rpsl.ecore#//ConstraintRequest"/>
+    <genClasses ecoreClass="rpsl.ecore#//RequestSimilarity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//RequestSimilarity/similarity_metric"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rpsl.ecore#//RequestSimilarity/similarity_value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
