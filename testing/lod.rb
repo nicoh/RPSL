@@ -28,7 +28,7 @@ lod_prototype_small = RpslMetaModel::Prototype.new(:prototype_element =>
 ##########################################
       
       
-############### COMPONENTS ############### 
+############### COMPONENTS AND PORTS ############### 
 input_point_cloud = RpslMetaModel::InputPort.new(:name => "inputPointCloud", :port_type => point_cloud_concept)
 output_point_cloud = RpslMetaModel::OutputPort.new(:name => "outputPointCloud", :port_type => point_cloud_concept)
 output_lod_high = RpslMetaModel::OutputPort.new(:name => "outputLoD_high", :port_type => lod_concept, :port_prototype => [lod_prototype_high])
@@ -36,7 +36,7 @@ output_lod_small = RpslMetaModel::OutputPort.new(:name => "outputLoD_small", :po
 point_cloud_subsampling_component_high = RpslMetaModel::ProcessingComponent.new(:name => "Subsampling", :port => [input_point_cloud, output_point_cloud, output_lod_high])
 kinect_component = RpslMetaModel::SensorComponent.new(:name => "Kinect", :port => [output_point_cloud])
 point_cloud_subsampling_component_small = RpslMetaModel::ProcessingComponent.new(:name => "Subsampling", :port => [input_point_cloud, output_point_cloud, output_lod_small])
-########################################## 
+#################################################### 
 
 
 ############### PERCEPTION GRAPHS ############### 
@@ -76,7 +76,9 @@ re = RequestEngine::RequestEngine.new(concept_repository, perception_graph_repos
 p = re.compute_request(request)
 
 p.each do |candidate|
-  puts candidate.perception_graph.name
+  puts candidate.perception_graph.name 
+  puts candidate.distance
 end
 
+puts 'hello world'
 ######################################################### 

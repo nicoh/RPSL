@@ -74,7 +74,7 @@ module RequestEngine
       puts perception_graph_repository
     end
 
-		def compute_request(request)
+    def compute_request(request)
 		  perception_graph_candidates = Array.new 
 		  
 		  # Check whether the Request is of type PrototypeRequest
@@ -104,9 +104,8 @@ module RequestEngine
 		              port_prototypes.each.select{ |p| p.concept.name == request_concept_name}.each do |proto|
 		                
 		                puts "We now investigate the prototype."
-		                puts proto
 		                
-		                # We only compute the distance if the number of elements is equal and similarity metric is Euclidian distance
+		                # We only compute the distance if the number of elements is equal and similarity metric is Euclidian distance (Extension, set missing dimensions to ZERO, request dimensions need to be subset of prototype dimensions)
 		                if proto.prototype_element.size == request.request_prototype.prototype_element.size and request.request_similarity.similarity_metric == :EUCLIDIAN_DISTANCE
 		                  elements = proto.prototype_element
 		                  request_elements = request.request_prototype.prototype_element
@@ -133,8 +132,9 @@ module RequestEngine
 		        
 		        
 		     end
-    return perception_graph_candidates
-		    end
+          return perception_graph_candidates
+		    
+        end
 		        
 		      end
 		  end
