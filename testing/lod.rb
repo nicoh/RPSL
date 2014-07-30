@@ -1,5 +1,6 @@
 require_relative '../generated/rpsl'
 require_relative '../core/request_engine'
+require_relative '../core/rpsl_validation'
 require  'pp'
 
 ############### CONCEPTS ############### 
@@ -41,7 +42,7 @@ point_cloud_subsampling_component_small = RpslMetaModel::ProcessingComponent.new
 
 ############### PERCEPTION GRAPHS ############### 
 subsampling_leaf_high = RpslMetaModel::Leaf.new(:component => point_cloud_subsampling_component_high)
-kinect_node = RpslMetaModel::Node.new(:component => kinect_component, :connection => [connection = RpslMetaModel::Connection.new(:element => subsampling_leaf_high, :src => output_point_cloud, :sink => input_point_cloud)])
+kinect_node = RpslMetaModel::Node.new(:component => kinect_component, :connection => [connection = RpslMetaModel::Connection.new(:element => subsampling_leaf_high, :src => output_lod_high, :sink => input_point_cloud)])
 pg_high = RpslMetaModel::PerceptionGraph.new(:name => "PG_HIGH_LOD", :element => [kinect_node, subsampling_leaf_high])
 
 subsampling_leaf_small = RpslMetaModel::Leaf.new(:component => point_cloud_subsampling_component_small)
@@ -51,34 +52,54 @@ pg_small = RpslMetaModel::PerceptionGraph.new(:name => "PG_SMALL_LOD", :element 
 
 
 
+
+
+
+
+pg = RpslMetaModel::PerceptionGraph.new()
+
+i = RpslMetaModel::InputPort.new()
+p = RpslMetaModel::OutputPort.new()
+pp = RpslMetaModel::OutputPort.new()
+c = RpslMetaModel::ProcessingComponent.new(:name => "Component", :port => [pp, i])
+s = RpslMetaModel::SensorComponent.new(:name => "", :port => [p])
+
+
+cv = RpslValidation::ComponentValidation.new()
+pg = RpslValidation::PerceptionGraphValidation.new()
+#cv.validate_component(c)
+cv.validate_component(point_cloud_subsampling_component_small)
+
+pg.validate_perception_graph(pg_small) 
+
 ############### REPOSITORIES AND REQUESTS ############### 
-concepts = Hash.new
-prototypes = Array.new
-perception_graphs = Array.new
-
-concepts[point_cloud_concept.name] = point_cloud_concept
-concepts[lod_concept.name] = lod_concept
-
-prototypes << lod_prototype_small
-prototypes << lod_prototype_high
-
-similarity = RpslMetaModel::RequestSimilarity.new(:similarity_metric => :EUCLIDIAN_DISTANCE, :similarity_value => 0)
-request = RpslMetaModel::PrototypeRequest.new(:name => "MyRequest", :request_sample_spec => :LIST_OF_SAMPLE, :request_similarity => similarity, :request_prototype => lod_prototype_small)
-
-
-perception_graphs << pg_small
-perception_graphs << pg_high
-
-concept_repository = RpslRepository::ConceptRepository.new(concepts,prototypes)
-perception_graph_repository = RpslRepository::PerceptionGraphRepository.new(perception_graphs)
-
-re = RequestEngine::RequestEngine.new(concept_repository, perception_graph_repository)
-p = re.compute_request(request)
-
-p.each do |candidate|
-  puts candidate.perception_graph.name 
-  puts candidate.distance
-end
-
-puts 'hello world'
+#concepts = Hash.new
+#prototypes = Array.new
+#perception_graphs = Array.new
+#
+#concepts[point_cloud_concept.name] = point_cloud_concept
+#concepts[lod_concept.name] = lod_concept
+#
+#prototypes << lod_prototype_small
+#prototypes << lod_prototype_high
+#
+#similarity = RpslMetaModel::RequestSimilarity.new(:similarity_metric => :EUCLIDIAN_DISTANCE, :similarity_value => 0)
+#request = RpslMetaModel::PrototypeRequest.new(:name => "MyRequest", :request_sample_spec => :LIST_OF_SAMPLE, :request_similarity => similarity, :request_prototype => lod_prototype_small)
+#
+#
+#perception_graphs << pg_small
+#perception_graphs << pg_high
+#
+#concept_repository = RpslRepository::ConceptRepository.new(concepts,prototypes)
+#perception_graph_repository = RpslRepository::PerceptionGraphRepository.new(perception_graphs)
+#
+#re = RequestEngine::RequestEngine.new(concept_repository, perception_graph_repository)
+#p = re.compute_request(request)
+#
+#p.each do |candidate|
+#  puts candidate.perception_graph.name 
+#  puts candidate.distance
+#end
+#
+#puts 'hello world'
 ######################################################### 

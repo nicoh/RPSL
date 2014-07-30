@@ -40,6 +40,16 @@ module RpslValidation
     def validate_perception_graph (perception_graph)
       assert perception_graph.name.size != 0,
         "RpslValidation::PerceptionGraphValidation ==> Perception Graph name of " + perception_graph.to_s + " is empty"
+      
+      # Check that a Connection connects only ports which have the same Concept (type)
+      perception_graph.element.each do |el|
+        if el.class == RpslMetaModel::Node and el.connection.size != 0
+          el.connection.each do |c|
+            assert c.sink.port_type.name == c.src.port_type.name, 
+            "RpslValidation::PerceptionGraphValidation ==> Type between Connection " + c.to_s + " does not match"
+          end
+         end
+      end
     end
   end
   
@@ -49,6 +59,12 @@ module RpslValidation
     def validate_concept (concept)
       assert concept.name.size != 0,
         "RpslValidation::ConceptValidation ==> Concept name of " + concept.to_s + " is empty"
+      
+      assert concept.subConcept.each.select{|c| c.name.size !=0 }.size == 0,
+        "RpslValidation::ConceptValidation ==> A subconcept name of concept " + concept.to_s + " is empty"
+        
+        
+          
     end
     
   end
@@ -62,19 +78,6 @@ module RpslValidation
     end
     
   end
-    
 end
-
-i = RpslMetaModel::InputPort.new()
-p = RpslMetaModel::OutputPort.new()
-pp = RpslMetaModel::OutputPort.new()
-c = RpslMetaModel::ProcessingComponent.new(:name => "Component", :port => [pp, i])
-s = RpslMetaModel::SensorComponent.new(:name => "Sensor", :port => [p])
-
-
-cv = RpslValidation::ComponentValidation.new()
-cv.validate_component(c)
-cv.validate_component(s)
-
 
 
