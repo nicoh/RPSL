@@ -46,7 +46,7 @@ module RpslValidation
         if el.class == RpslMetaModel::Node and el.connection.size != 0
           el.connection.each do |c|
             assert c.sink.port_type.name == c.src.port_type.name, 
-            "RpslValidation::PerceptionGraphValidation ==> Type between Connection " + c.to_s + " does not match"
+            "RpslValidation::PerceptionGraphValidation ==> Type between Connection " + c.to_s + " does not match. Source " + c.src.port_type.name.to_s + " Sink " + c.sink.port_type.name.to_s  
           end
          end
       end
@@ -59,12 +59,9 @@ module RpslValidation
     def validate_concept (concept)
       assert concept.name.size != 0,
         "RpslValidation::ConceptValidation ==> Concept name of " + concept.to_s + " is empty"
-      
+
       assert concept.subConcept.each.select{|c| c.name.size !=0 }.size == 0,
         "RpslValidation::ConceptValidation ==> A subconcept name of concept " + concept.to_s + " is empty"
-        
-        
-          
     end
     
   end
