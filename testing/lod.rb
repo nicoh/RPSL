@@ -18,6 +18,7 @@ number_of_points_dimension = RpslMetaModel::IntervalDimension.new(:name => "Numb
 number_of_points_domain = RpslMetaModel::Domain.new(:name => "NumberOfPoints", :dimension => [number_of_points_dimension])
 rgb_domain = RpslMetaModel::Domain.new(:name => "RGB", :dimension => [red_dimension, green_dimension, blue_dimension])
 point_cloud_concept = RpslMetaModel::Concept.new(:name => "PointCloud", :domain => [rgb_domain,xyz_domain, number_of_points_domain])
+rgb_concept = RpslMetaModel::Concept.new(:name => "RGB", :domain => [rgb_domain])
 ######################################## 
 
 
@@ -59,22 +60,21 @@ validation.validate_perception_graph(pg_high)
 #################################################
 
 
-
-
 ############### REPOSITORIES AND REQUESTS ############### 
 concepts = Hash.new
 prototypes = Array.new
 perception_graphs = Array.new
 
-
 concepts[point_cloud_concept.name] = point_cloud_concept
 concepts[lod_concept.name] = lod_concept
+concepts[rgb_concept.name] = rgb_concept
 
 prototypes << lod_prototype_small
 prototypes << lod_prototype_high
 
 similarity = RpslMetaModel::RequestSimilarity.new(:similarity_metric => :EUCLIDIAN_DISTANCE, :similarity_value => 0)
 request = RpslMetaModel::PrototypeRequest.new(:name => "MyRequest", :request_sample_spec => :LIST_OF_SAMPLE, :request_similarity => similarity, :request_prototype => lod_prototype_small)
+
 #
 #
 perception_graphs << pg_small
@@ -86,12 +86,11 @@ perception_graph_repository = RpslRepository::PerceptionGraphRepository.new(perc
 re = RequestEngine::RequestEngine.new(concept_repository, perception_graph_repository)
 candidates = re.compute_request(request)
 
-
-
 candidates.each do |c|
   puts c.perception_graph.name 
   puts c.distance
 end
+
 #
 #puts 'hello world'
 ######################################################### 

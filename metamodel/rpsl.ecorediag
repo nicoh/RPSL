@@ -547,7 +547,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_b_YLUQjrEeSZ280X6TWYjg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rpsl.ecore#//Interval"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b_YLUgjrEeSZ280X6TWYjg" x="1080" y="1296" width="255" height="159"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b_YLUgjrEeSZ280X6TWYjg" x="1080" y="1272" width="255" height="195"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Akd6oA5XEeSvl_oMwb-3Sg" type="1005">
     <children xmi:type="notation:Node" xmi:id="_AkfIwA5XEeSvl_oMwb-3Sg" type="4010"/>
@@ -666,6 +666,57 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_BQMiwQ5YEeSvl_oMwb-3Sg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="12560536" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rpsl.ecore#//RequestSimilarity"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BQMiwg5YEeSvl_oMwb-3Sg" x="528" y="1284" width="315" height="74"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_CcG9kGmwEeS11OG2KO_5hg" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_CcILsGmwEeS11OG2KO_5hg" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_CcIywGmwEeS11OG2KO_5hg" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_MxgrIGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_BOOLEAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MxgrIWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_OBDncGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_INT8"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OBDncWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_T7eXcGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_INT16"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_T7eXcWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VXykcGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_INT32"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VXykcWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_WhQt8GmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_UINT32"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WhQt8WmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_YKeHcGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_INT64"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_YKeHcWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ZzALgGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_UINT64"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZzALgWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_a--2cGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_FLOAT32"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_a--2cWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_cPFMYGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_FLOAT64"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cPFMYWmwEeS11OG2KO_5hg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_dnlQYGmwEeS11OG2KO_5hg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE/RPSL_STRING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dnlQYWmwEeS11OG2KO_5hg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_CcIywWmwEeS11OG2KO_5hg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_CcIywmmwEeS11OG2KO_5hg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_CcIyw2mwEeS11OG2KO_5hg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_CcG9kWmwEeS11OG2KO_5hg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="rpsl.ecore#//RPSL_PRIMITIVE_TYPE"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CcG9kmmwEeS11OG2KO_5hg" x="1368" y="1248" width="183"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_CiSWoQjPEeSZ280X6TWYjg"/>
   <element xmi:type="ecore:EPackage" href="rpsl.ecore#/"/>
