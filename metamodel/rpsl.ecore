@@ -123,6 +123,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper_bound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primitive_type" lowerBound="1"
         eType="#//RPSL_PRIMITIVE_TYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SIMILARITY_METRIC">
     <eLiterals name="EUCLIDIAN_DISTANCE"/>

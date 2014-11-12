@@ -1,22 +1,25 @@
 require_relative '../generated/rpsl'
+require_relative '../generated/units'
 require_relative '../core/request_engine'
 
-=begin
-hue_dim = 
-saturation_dim = 
-value_dim = 
-=end
+base = Units::MultiDimensionalDimension.new(:dimensionality => 1, :dimension => :PlaneAngle)
+deg = Units::Dimension.new(:name => "deg", :bases => [base]) 
+degree = Units::SingularUnit.new(:dimension => deg)
 
-red_dim   = RpslMetaModel::IntervalDimension.new(:name => "Red", :interval => interval = RpslMetaModel::Interval.new(:name => "red", :is_circular => false, :lower_bound => 0, :upper_bound => 255, :primitive_type => :RPSL_INT8))
+hue_dim = RpslMetaModel::IntervalDimension.new(:name => "Hue", :interval => interval = RpslMetaModel::Interval.new(:name => "hue", :is_circular => true, :lower_bound => 0, :upper_bound => 360, :primitive_type => :RPSL_FLOAT32, :unit => degree))
+saturation_dim = RpslMetaModel::IntervalDimension.new(:name => "Saturation", :interval => interval = RpslMetaModel::Interval.new(:name => "saturation", :is_circular => false, :lower_bound => 0, :upper_bound => 1, :primitive_type => :RPSL_FLOAT32))
+value_dim = RpslMetaModel::IntervalDimension.new(:name => "Value", :interval => interval = RpslMetaModel::Interval.new(:name => "value", :is_circular => false, :lower_bound => 0, :upper_bound => 1, :primitive_type => :RPSL_FLOAT32))
+
+red_dim = RpslMetaModel::IntervalDimension.new(:name => "Red", :interval => interval = RpslMetaModel::Interval.new(:name => "red", :is_circular => false, :lower_bound => 0, :upper_bound => 255, :primitive_type => :RPSL_INT8))
 green_dim = RpslMetaModel::IntervalDimension.new(:name => "Green", :interval => interval = RpslMetaModel::Interval.new(:name => "green", :is_circular => false, :lower_bound => 0, :upper_bound => 255, :primitive_type => :RPSL_INT8))
-blue_dim  = RpslMetaModel::IntervalDimension.new(:name => "Blue", :interval => interval = RpslMetaModel::Interval.new(:name => "blue", :is_circular => false, :lower_bound => 0, :upper_bound => 255, :primitive_type => :RPSL_INT8))
+blue_dim = RpslMetaModel::IntervalDimension.new(:name => "Blue", :interval => interval = RpslMetaModel::Interval.new(:name => "blue", :is_circular => false, :lower_bound => 0, :upper_bound => 255, :primitive_type => :RPSL_INT8))
 
-=begin
 hsv_color_domain = RpslMetaModel::Domain.new(:name => "Color",     :dimension => [hue_dim, saturation_dim, value_dim])
 rgb_color_domain = RpslMetaModel::Domain.new(:name => "Color",     :dimension => [red_dim, green_dim, blue_dim])
-grayscale_domain = RpslMetaModel::Domain.new(:name => "Grayscale", :dimension => [gray_dim])
 
-domain_color = RpslMetaModel::Domain.new(:name => "Color", :dimension => [red, green, blue])
+
+
+=begin
 concept_apple = RpslMetaModel::Concept.new(:name => "Apple", :domain => [domain_color]) 
 
 red_prototype = RpslMetaModel::PrototypeInstance.new(:instance_element => 

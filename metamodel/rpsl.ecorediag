@@ -536,6 +536,10 @@
         <element xmi:type="ecore:EAttribute" href="rpsl.ecore#//Interval/primitive_type"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Lz6egQv6EeSTo61OkPdCaA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_7AjaoGpiEeSt3p_gymbpEA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="rpsl.ecore#//Interval/unit"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7AjaoWpiEeSt3p_gymbpEA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_b_ZZcAjrEeSZ280X6TWYjg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_b_ZZcQjrEeSZ280X6TWYjg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_b_ZZcgjrEeSZ280X6TWYjg"/>
@@ -547,7 +551,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_b_YLUQjrEeSZ280X6TWYjg" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="rpsl.ecore#//Interval"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b_YLUgjrEeSZ280X6TWYjg" x="1080" y="1272" width="255" height="195"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_b_YLUgjrEeSZ280X6TWYjg" x="900" y="1272" width="435" height="195"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Akd6oA5XEeSvl_oMwb-3Sg" type="1005">
     <children xmi:type="notation:Node" xmi:id="_AkfIwA5XEeSvl_oMwb-3Sg" type="4010"/>

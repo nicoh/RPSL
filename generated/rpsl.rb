@@ -109,8 +109,9 @@ module RpslMetaModel
       has_attr 'doc', String 
       has_attr 'is_circular', Boolean 
       has_attr 'lower_bound', Object 
-      has_attr 'upper_bound', Object
+      has_attr 'upper_bound', Object 
       has_attr 'primitive_type', RpslMetaModel::RPSL_PRIMITIVE_TYPE, :lowerBound => 1 
+      has_attr 'unit', Object 
    end
 
    class Request < RGen::MetamodelBuilder::MMBase
