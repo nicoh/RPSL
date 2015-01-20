@@ -34,6 +34,7 @@ module RpslMetaModel
    class PerceptionGraph < RGen::MetamodelBuilder::MMBase
       has_attr 'name', String, :lowerBound => 1 
       has_attr 'doc', String 
+      has_attr 'uuid', String, :lowerBound => 1 
    end
 
    class Element < RGen::MetamodelBuilder::MMBase
@@ -67,6 +68,7 @@ module RpslMetaModel
    class Concept < RGen::MetamodelBuilder::MMBase
       has_attr 'name', String, :lowerBound => 1 
       has_attr 'doc', String 
+      has_attr 'uuid', String, :lowerBound => 1 
    end
 
    class AbstractInstance < RGen::MetamodelBuilder::MMBase
@@ -127,7 +129,18 @@ module RpslMetaModel
 
    class RequestSimilarity < RGen::MetamodelBuilder::MMBase
       has_attr 'similarity_metric', RpslMetaModel::SIMILARITY_METRIC, :lowerBound => 1 
-      has_attr 'similarity_value', Object
+      has_attr 'distance', Object 
+      has_attr 'distance_type', RpslMetaModel::RPSL_PRIMITIVE_TYPE 
+      has_attr 'has_distance', Boolean 
+   end
+
+   class Ordinal < RGen::MetamodelBuilder::MMBase
+      has_attr 'name', String 
+      has_attr 'value', Object 
+      has_attr 'is_constant', Boolean 
+      has_attr 'has_rank', Boolean 
+      has_attr 'rank', Object 
+      has_attr 'primitive_type', RpslMetaModel::RPSL_PRIMITIVE_TYPE 
    end
 
 end
@@ -155,6 +168,8 @@ RpslMetaModel::Data.has_many 'prototype', RpslMetaModel::Prototype, :lowerBound 
 RpslMetaModel::Prototype.contains_many_uni 'prototype_element', RpslMetaModel::PrototypeElement, :lowerBound => 1 
 RpslMetaModel::Domain.contains_many_uni 'dimension', RpslMetaModel::DomainDimension, :lowerBound => 1 
 RpslMetaModel::IntervalDimension.has_one 'interval', RpslMetaModel::Interval, :lowerBound => 1 
+RpslMetaModel::OrdinalDimension.has_many 'ordinal', RpslMetaModel::Ordinal, :lowerBound => 1 
 RpslMetaModel::PrototypeElement.has_one 'prototype_dimension', RpslMetaModel::DomainDimension, :lowerBound => 1 
+RpslMetaModel::PrototypeElement.has_one 'domain', RpslMetaModel::Domain, :lowerBound => 1 
 RpslMetaModel::PrototypeRequest.has_one 'request_similarity', RpslMetaModel::RequestSimilarity, :lowerBound => 1 
 RpslMetaModel::PrototypeRequest.has_one 'request_prototype', RpslMetaModel::Prototype, :lowerBound => 1 

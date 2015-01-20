@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rpslMetaModel" nsURI="http://www.robotics.h-brs.de/rpsl" nsPrefix="RpslMetaModel">
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rpslMetaModel"
+    nsURI="http://www.robotics.h-brs.de/rpsl" nsPrefix="RpslMetaModel">
   <eClassifiers xsi:type="ecore:EClass" name="Component">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="doc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -32,6 +34,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="doc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
         upperBound="-1" eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uuid" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -81,6 +84,7 @@
         eType="#//Concept" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" lowerBound="1"
         upperBound="-1" eType="#//Domain"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uuid" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractInstance" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="concept" lowerBound="1"
@@ -107,13 +111,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
         eType="#//Interval"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OrdinalDimension" eSuperTypes="#//DomainDimension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrdinalDimension" eSuperTypes="#//DomainDimension">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ordinal" lowerBound="1"
+        upperBound="-1" eType="#//Ordinal"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NominalDimension" eSuperTypes="#//DomainDimension"/>
   <eClassifiers xsi:type="ecore:EClass" name="RatioDimension" eSuperTypes="#//DomainDimension"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrototypeElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="prototype_dimension" lowerBound="1"
         eType="#//DomainDimension"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" lowerBound="1"
+        eType="#//Domain"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interval">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -148,7 +157,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="RequestSimilarity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="similarity_metric" lowerBound="1"
         eType="#//SIMILARITY_METRIC"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="similarity_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance_type" eType="#//RPSL_PRIMITIVE_TYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="has_distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RPSL_PRIMITIVE_TYPE">
     <eLiterals name="RPSL_BOOLEAN"/>
@@ -161,5 +172,13 @@
     <eLiterals name="RPSL_FLOAT32" value="7"/>
     <eLiterals name="RPSL_FLOAT64" value="8"/>
     <eLiterals name="RPSL_STRING" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ordinal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="has_rank" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primitive_type" eType="#//RPSL_PRIMITIVE_TYPE"/>
   </eClassifiers>
 </ecore:EPackage>
