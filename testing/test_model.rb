@@ -6,15 +6,15 @@ green = RpslMetaModel::IntervalDimension.new(:name => "Green", :interval => inte
 blue  = RpslMetaModel::IntervalDimension.new(:name => "Blue", :interval => interval = RpslMetaModel::Interval.new(:name => "blue", :isCircular => false, :lowerBound => 0, :upperBound => 255, :primitiveType => "INTEGER"))
 
 domain_color = RpslMetaModel::Domain.new(:name => "Color", :dimension => [red, green, blue])
-concept_apple = RpslMetaModel::Concept.new(:name => "Apple", :domain => [domain_color]) 
+concept_apple = RpslMetaModel::Concept.new(:name => "Apple", :domain => [domain_color])
 
-red_prototype = RpslMetaModel::PrototypeInstance.new(:instance_element => 
-		[ RpslMetaModel::InstanceElement.new(:value => 255, :instance_dimension => red), 
+red_prototype = RpslMetaModel::PrototypeInstance.new(:instance_element =>
+		[ RpslMetaModel::InstanceElement.new(:value => 255, :instance_dimension => red),
 		  RpslMetaModel::InstanceElement.new(:value => 0, :instance_dimension => green),
 		  RpslMetaModel::InstanceElement.new(:value => 0, :instance_dimension => blue)])
 
-crimson_prototype = RpslMetaModel::PrototypeInstance.new(:instance_element => 
-		[ RpslMetaModel::InstanceElement.new(:value => 220, :instance_dimension => red), 
+crimson_prototype = RpslMetaModel::PrototypeInstance.new(:instance_element =>
+		[ RpslMetaModel::InstanceElement.new(:value => 220, :instance_dimension => red),
 		  RpslMetaModel::InstanceElement.new(:value => 20, :instance_dimension => green),
 		  RpslMetaModel::InstanceElement.new(:value => 60, :instance_dimension => blue)])
 
@@ -27,4 +27,3 @@ r.request_concept = concept_apple
 
 request_engine = RequestEngine::RequestEngine.new(concept_repository)
 request_engine.compute_request(r)
-
