@@ -1,40 +1,91 @@
 import rospy
 import roslaunch
+import threading
+import subprocess
+import os
+import time
 from std_msgs.msg import String
 
-launch = roslaunch.scriptapi.ROSLaunch()
-launch.start()
-package_name = 'rqt_gui'
+start_node_received = False
+stop_node_received = False
+node_name = ""
 current_proc = None
 
+class AdaptationNode():
 
-class Adaptation(self):
+	def __init__(self):
+		# Create the subscribers
+		sub_start = rospy.Subscriber("/start_node", String, self.start_node)
+		sub_stop =  rospy.Subscriber("/stop_node", String, self.stop_node)
 
+		global start_node_received
+		global stop_node_received
+		global node_name
+		global current_proc
+		
+		while not rospy.is_shutdown():
+			
+			if stop_node_received == True:
+				#os.system("rosnode kill aruco")			
+				
+				#if current_proc == None:
+				#	pass
 
-def start_node(node_name):
-	#node = roslaunch.core.Node(package_name, node_name)
-	#current_proc = launch.launch(node)
-	current_proc = launch.launch(roslaunch.core.Node(package_name, node_name))
+				#if current_proc != None:
+				#	current_proc.kill()	
 
-def stop_node(node_name):
-	if current_proc.is_alive() == True:
-		current_proc.stop()	
+				#if subprocess.call("rosnode kill aruco", shell=True) != 0:
+				#	print "Adaptation Node: Killing != 0"
+				#	pass
+				#time.sleep(1)
+				#stop_node_received = False
+				pass
 
-def adaptation_stop_msg_callback(data):
-	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-	stop_node(data.data)
+			if start_node_received == True:
+				#os.system(str(node_name))
+				
+				current_proc = subprocess.Popen(str(node_name), shell=True)
+				#print current_proc.pid
+				#time.sleep(1)
+				start_node_received = False
+				pass	
 
-def adaptation_start_msg_callback(data):
-	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-	start_node(data.data)
+			pass
+		
+	def start_node(self, name):
 
-def init_adaptation_node():
-	rospy.init_node('adaptation_node', anonymous=True)
+		lock = threading.Lock()
+		lock.acquire()
+		
+		global start_node_received
+		global node_name 
 
-	rospy.Subscriber("adaptation_start", String, adaptation_start_msg_callback)
-	rospy.Subscriber("adaptation_stop", String, adaptation_stop_msg_callback)
-	rospy.spin()
+		node_name = name.data
+		start_node_received = True
 
+		rospy.loginfo(rospy.get_caller_id() + "I start %s", name.data)
+
+		lock.release()
+
+	def stop_node(self, name):
+		
+		lock = threading.Lock()
+		lock.acquire()
+
+		global stop_node_received
+		global node_name
+
+		node_name = name.data
+		stop_node_received = True
+
+		rospy.loginfo(rospy.get_caller_id() + "I stop %s", name.data)
+
+		lock.release()
 
 if __name__ == '__main__':
-	init_adaptation_node()	
+	rospy.init_node('adaptation_node', anonymous=True, disable_signals=False)
+
+	try:
+		an = AdaptationNode()
+	except rospy.ROSInterruptException:
+		pass

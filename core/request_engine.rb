@@ -1,7 +1,26 @@
 require_relative '../generated/rpsl'
 require_relative '../repository/rpsl_repository'
 require 'set'
+require "matrix"
 require 'diverge'
+
+class Diverge
+	def initialize(p, q)
+		@p, @q = p, q
+
+    	unless p.length == q.length
+    	  debugger { "The two discrete distributions must have the same number of elements" }
+    	end
+
+    	#unless (p_sum = p.inject(&:+)) == 1
+    	#  debugger { "Warning: the first argument does not sum to 1, the sum is #{p_sum.inspect}" }
+    	#end
+
+    	#unless (q_sum = q.inject(&:+)) == 1
+      		#debugger { "Warning: the second argument does not sum to 1, the sum is #{q_sum.inspect}" }
+    	#end
+  	end
+end	
 
 module RequestEngine
   
@@ -39,9 +58,7 @@ module RequestEngine
     end
 
     def normalize_sample(min_x, max_x, sample)
-
-    	z = ((sample - min_x) / (max_x - min_x))
-
+    	z = ((sample - min_x) / (max_x - min_x)).round(5)
     	return z 
     end
 
@@ -49,11 +66,13 @@ module RequestEngine
     	perception_graph_candidates = Array.new
 
     	if request.class == RpslMetaModel::PrototypeRequest 
-    		puts 'RequestEngine :: Received a PrototypeRequest'
+    		#puts 'RequestEngine :: Received a PrototypeRequest'
 
 		    request_proto_concept_name = request.request_prototype.concept.name
-		    
-			# Check whether the Concept expressed in the Request is available in the concept repository
+			
+		    #p request.instance_variable_get("@#{:request_similarity}")
+
+		    # Check whether the Concept expressed in the Request is available in the concept repository
     		if self.concept_repository.has_key?(request_proto_concept_name) != true		
     			raise 'RequestEngine :: Concept in the request prototype is NOT available'
     		end
@@ -63,10 +82,10 @@ module RequestEngine
     			pg.element.select{ |e| e.class == RpslMetaModel::Leaf}.each do |element|
     				# Get all the output ports with a prototype associated 
 		            element.component.port.select{ |p| p.class == RpslMetaModel::OutputPort and p.port_prototype.length > 0}.each do |op|
-		            
+		            	
 		            	port_prototypes = op.port_prototype
 
-	                    # We check whether the Concept expressed in the Prototype of the OutputPort matches with the Prototype of the Request
+		            	# We check whether the Concept expressed in the Prototype of the OutputPort matches with the Prototype of the Request
 		            	port_prototypes.each.select{ |p| p.concept.name == request_proto_concept_name}.each do |proto|
 		            		
 		            		# We need to decide which SIMILARITY_METRIC we would like to apply
@@ -103,6 +122,7 @@ module RequestEngine
 
 
 		            			if a.size == 0 && b.size == 0
+		            				
 		            				# We can compute now the distance
 
 		            				# We need to normalize the data 
@@ -111,8 +131,11 @@ module RequestEngine
 		            				# z_i = x_i 0 - min(x) / max(x) - min(x)
 
 		            				min_x = 0.0
-		            				max_x = 1000.0
+		            				max_x = 921600.0
 
+		            				#min_x = 0.0
+		            				#max_x = 921600.0
+		            				
 		            				# Get all the values from the Request prototype and from the Prototype
 
 									# Normalize all the data
@@ -120,18 +143,16 @@ module RequestEngine
 									normalized_proto_elements = []
 									normalized_req_proto_elements = []
 
-									prototype_elements.each do |el|
+									prototype_elements.each.select{ |p| p.instance_variable_get("@#{:domain}").to_s != "PerformanceSignatureConcept.number_of_markers"}.each do |el|
 										normalized_proto_elements << self.normalize_sample(min_x, max_x, el.value)
 									end
 									
-									request_prototype_elements.each do |el|
+									request_prototype_elements.each.select{ |p| p.instance_variable_get("@#{:domain}").to_s != "PerformanceSignatureConcept.number_of_markers"}.each do |el|
 										normalized_req_proto_elements << self.normalize_sample(min_x, max_x, el.value)
 									end		
 
-									#p normalized_proto_elements
-									#p normalized_req_proto_elements
-
 									distance = Diverge.new(normalized_proto_elements, normalized_req_proto_elements).js
+									#distance = Diverge.new(normalized_proto_elements, normalized_req_proto_elements).corr
 									perception_graph_candidates << PerceptionGraphCandidate.new(distance, pg)
 		            			end	
 
