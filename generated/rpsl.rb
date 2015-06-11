@@ -8,6 +8,7 @@ module RpslMetaModel
    SIMILARITY_METRIC = Enum.new(:name => 'SIMILARITY_METRIC', :literals =>[ :EUCLIDIAN_DISTANCE, :JACCARD_DISTANCE ])
    REQUEST_SAMPLE_SPEC = Enum.new(:name => 'REQUEST_SAMPLE_SPEC', :literals =>[ :LIST_OF_SAMPLE, :SAMPLE_OF ])
    RPSL_PRIMITIVE_TYPE = Enum.new(:name => 'RPSL_PRIMITIVE_TYPE', :literals =>[ :RPSL_BOOLEAN, :RPSL_INT8, :RPSL_INT16, :RPSL_INT32, :RPSL_UINT32, :RPSL_INT64, :RPSL_UINT64, :RPSL_FLOAT32, :RPSL_FLOAT64, :RPSL_STRING ])
+   RPSL_SYMBOLS = Enum.new(:name => 'RPSL_SYMBOLS', :literals =>[ :POSITIVE_INFINITY, :NEGATIVE_INFINITY ])
 
    class Component < RGen::MetamodelBuilder::MMBase
       has_attr 'name', String, :lowerBound => 1 
@@ -34,7 +35,6 @@ module RpslMetaModel
    class PerceptionGraph < RGen::MetamodelBuilder::MMBase
       has_attr 'name', String, :lowerBound => 1 
       has_attr 'doc', String 
-      has_attr 'uuid', String, :lowerBound => 1 
    end
 
    class Element < RGen::MetamodelBuilder::MMBase
@@ -68,7 +68,7 @@ module RpslMetaModel
    class Concept < RGen::MetamodelBuilder::MMBase
       has_attr 'name', String, :lowerBound => 1 
       has_attr 'doc', String 
-      has_attr 'uuid', String, :lowerBound => 1 
+      has_attr 'uuid', Object 
    end
 
    class AbstractInstance < RGen::MetamodelBuilder::MMBase
@@ -129,18 +129,7 @@ module RpslMetaModel
 
    class RequestSimilarity < RGen::MetamodelBuilder::MMBase
       has_attr 'similarity_metric', RpslMetaModel::SIMILARITY_METRIC, :lowerBound => 1 
-      has_attr 'distance', Object 
-      has_attr 'distance_type', RpslMetaModel::RPSL_PRIMITIVE_TYPE 
-      has_attr 'has_distance', Boolean 
-   end
-
-   class Ordinal < RGen::MetamodelBuilder::MMBase
-      has_attr 'name', String 
-      has_attr 'value', Object 
-      has_attr 'is_constant', Boolean 
-      has_attr 'has_rank', Boolean 
-      has_attr 'rank', Object 
-      has_attr 'primitive_type', RpslMetaModel::RPSL_PRIMITIVE_TYPE 
+      has_attr 'similarity_value', Object 
    end
 
 end
@@ -168,8 +157,6 @@ RpslMetaModel::Data.has_many 'prototype', RpslMetaModel::Prototype, :lowerBound 
 RpslMetaModel::Prototype.contains_many_uni 'prototype_element', RpslMetaModel::PrototypeElement, :lowerBound => 1 
 RpslMetaModel::Domain.contains_many_uni 'dimension', RpslMetaModel::DomainDimension, :lowerBound => 1 
 RpslMetaModel::IntervalDimension.has_one 'interval', RpslMetaModel::Interval, :lowerBound => 1 
-RpslMetaModel::OrdinalDimension.has_many 'ordinal', RpslMetaModel::Ordinal, :lowerBound => 1 
 RpslMetaModel::PrototypeElement.has_one 'prototype_dimension', RpslMetaModel::DomainDimension, :lowerBound => 1 
-RpslMetaModel::PrototypeElement.has_one 'domain', RpslMetaModel::Domain, :lowerBound => 1 
 RpslMetaModel::PrototypeRequest.has_one 'request_similarity', RpslMetaModel::RequestSimilarity, :lowerBound => 1 
 RpslMetaModel::PrototypeRequest.has_one 'request_prototype', RpslMetaModel::Prototype, :lowerBound => 1 
