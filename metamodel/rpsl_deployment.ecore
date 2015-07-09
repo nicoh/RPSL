@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rpslDeploymentMetaModel"
+    nsURI="http://www.robotics.h-brs.de/rpsl_deployment" nsPrefix="RpslDeploymentMetaModel">
+  <eClassifiers xsi:type="ecore:EClass" name="Deployment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deployment_element" lowerBound="1"
+        upperBound="-1" eType="#//DeploymentElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="perception_graph" lowerBound="1"
+        eType="ecore:EClass rpsl_perception_graph.ecore#//PerceptionGraph"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeploymentElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component_set" lowerBound="1"
+        eType="#//AbstractComponentSet" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="platform" lowerBound="1"
+        eType="ecore:EClass rpsl_platform.ecore#//Platform"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="execution_unit" lowerBound="1"
+        eType="ecore:EClass rpsl_execution.ecore#//ExecutionUnit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass rpsl_component.ecore#//Component"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractComponentSet" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RosComponentSet" eSuperTypes="#//AbstractComponentSet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ros_node" lowerBound="1"
+        upperBound="-1" eType="#//RosNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RosNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

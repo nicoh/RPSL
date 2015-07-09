@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rpslExecutionMetaModel"
+    nsURI="http://www.robotics.h-brs.de/rpsl_execution" nsPrefix="RpslExecutionMetaModel">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionUnit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="#//ExecutionUnit">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thread" upperBound="-1"
+        eType="#//Thread" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="process_property_prototype"
+        upperBound="-1" eType="ecore:EClass rpsl_conceptual_space.ecore#//Prototype"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thread" eSuperTypes="#//ExecutionUnit">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thread_property_prototype"
+        upperBound="-1" eType="ecore:EClass rpsl_conceptual_space.ecore#//Prototype"/>
+  </eClassifiers>
+</ecore:EPackage>

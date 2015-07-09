@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rpslAlgorithmMetaModel"
+    nsURI="http://www.robotics.h-brs.de/rpsl_algorithm" nsPrefix="RpslAlgorithMetaModel">
+  <eClassifiers xsi:type="ecore:EClass" name="Category">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sub_category" upperBound="-1"
+        eType="#//Category" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Algorithm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="complexity" eType="#//COMPLEXITY"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="category" lowerBound="1"
+        eType="#//Category"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlgorithmImplementation" eSuperTypes="#//Algorithm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="algorithm_property_prototype"
+        upperBound="-1" eType="ecore:EClass rpsl_conceptual_space.ecore#//Prototype"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="COMPLEXITY">
+    <eLiterals name="CONSTANT"/>
+    <eLiterals name="LINEAR" value="1"/>
+    <eLiterals name="DOUBLE_LOG" value="2"/>
+    <eLiterals name="EXPONENTIAL" value="3"/>
+    <eLiterals name="ANYTIME" value="4"/>
+  </eClassifiers>
+</ecore:EPackage>
